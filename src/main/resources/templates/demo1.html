@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<!--
+输出hello数据
+这句使用 th:text="${变量名}" 表示 使用thymeleaf获取文本数据，类似于EL表达式。
+thymeleaf：都是作用于HTML标签之上
+-->
+<body>
+<p th:text="${hello}">aaa</p>
+-----[[${hello}]]----
+<!--
+    @{} 构建一个映射路径，自动增加上下文路径
+-->
+
+<form id="login-form" th:action="@{/demo1}" method="post">
+       <button>提交</button>
+</form>
+<br/>
+<hr/>
+<table border="1" >
+    <tr>
+        <td>下标</td>
+        <td>用户名</td>
+        <td>密码</td>
+        <td>姓名</td>
+    </tr>
+    <!--从请求域中获取数据，不需要加任何参数-->
+    <tr th:each="user,status:${users}">
+        <td>${user.index + 1}</td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.pwd}">123</td>
+        <td th:text="${user.name}">joker</td>
+    </tr>
+</table> 
+<br>
+<hr/>
+<div>
+    获取key=no的值：<span th:text="${dataMap.No}"></span>
+    获取value的值：<span th:text="${dataMap.address}"></span>
+</div>
+<br>
+<hr>
+
+<div th:each="map:${dataMap}">
+    获取key<span th:text="${map.key}"></span><br>
+    获取values<span th:text="${map.value}"></span>
+</div>
+<br>
+<hr>
+
+<div th:each="name:${names}">
+    <span th:text="${name}"></span><br>
+</div>
+
+</body>
+</html>
